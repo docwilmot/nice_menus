@@ -302,7 +302,7 @@ function nice_menus_block_view($delta = 1) {
     else {
       $subject = $output['subject'];
     }
-    $block['subject'] = '<span class="' . $class . '">' . check_plain($subject) . '</span>';
+    $block['subject'] = t($subject);
     $block['content']['#contextual_links']['simple_menus'] = array('admin/structure/menu/manage', array($menu_name));
   }
   else {
@@ -472,8 +472,8 @@ function theme_nice_menus_tree($variables) {
   // Otherwise just set a title and move on.
   else {
     // Get the title from the DB since we don't have it in the $menu.
-    //$result = db_query("SELECT title FROM {menu_custom} WHERE menu_name = :menu_name", array(':menu_name' => $menu_name))->fetchField();
-    $title = 'test'; //check_plain($result);
+    $result = config_get('menu.menu.' . $menu_name, 'title');
+    $title = check_plain($result);
   }
 
   $output['content'] = '';
